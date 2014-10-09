@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>   
+           
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+	      
+    <package name="ttt" namespace="/ttt" extends="struts-default"> 
+		
+		<action name="Login_*" method="{1}" class="csc309.ttt.Login">
+			<result name="success">/ttt/MainScreen.jsp</result>
+			<result name="input">/ttt/LoginCollector.jsp</result>
+			<interceptor-ref name="defaultStack">
+    			<param name="validation.excludeMethods">show</param>
+  			</interceptor-ref>
+		</action>
+		
+		<action name="AvailableUsers">
+			<result>/ttt/AvailableUsers.jsp</result>
+		</action>
+		
+		<action name="Invite" class="csc309.ttt.Invite">
+			<result name="success">/ttt/GameScreen.jsp</result>
+			<result name="failure">/ttt/MainScreen.jsp</result>
+		</action>
+	
+		<action name="Invitations">
+			<result>/ttt/Invitations.jsp</result>
+		</action>
+		
+		<action name="Accept" class="csc309.ttt.Accept">
+			<result name="success">/ttt/GameScreen.jsp</result>
+			<result name="failure">/ttt/MainScreen.jsp</result>
+		</action>
+		
+		<action name="back" method="back" class="csc309.ttt.GoBack"></action>
+		
+	</package>
+		     
+	<package name="tttjson" namespace="/ttt" extends="json-default"> 
+		
+		<action name="SendMove" method="send" class="csc309.ttt.Move">
+			<result type="json"/>
+		</action>
+		
+		<action name="GetMove" method="get" class="csc309.ttt.Move">
+			<result type="json"/> 
+		</action>
+	</package>	
+
+</struts>
